@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# --- Render: permitir tu dominio público -------------------------
+RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]          # entornos locales
+if RENDER_EXTERNAL_HOSTNAME:                        # dominio que Render asigna
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# -----------------------------------------------------------------
 
 # Application definition
 
