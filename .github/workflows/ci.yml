@@ -33,3 +33,15 @@ jobs:
       run: |
         python manage.py migrate --noinput
         pytest -q
+smoke:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render app
+        run: |
+          STATUS=$(curl -sw '%{http_code}' -o /dev/null https://ci-cd-7hmy.onrender.com/todos/)
+          if [ "$STATUS" != "200" ]; then
+            echo "Smoke test failed: HTTP $STATUS"
+            exit 1
+          fi
