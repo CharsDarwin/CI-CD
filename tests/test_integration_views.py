@@ -14,3 +14,8 @@ def test_todos_list_contains_item_text():
     Todo.objects.create()
     resp = client.get("/todos/")
     assert "Todo" in resp.content.decode() or "task" in resp.content.decode()
+
+@pytest.mark.django_db
+def test_new_header_shown(client):
+    resp = client.get("/todos/")
+    assert b"Mis Tareas 2025" in resp.content
