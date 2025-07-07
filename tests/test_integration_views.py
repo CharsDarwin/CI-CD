@@ -14,5 +14,3 @@ def test_todos_list_contains_item_text():
     Todo.objects.create()
     resp = client.get("/todos/")
     assert "Todo" in resp.content.decode() or "task" in resp.content.decode()
-
-
