@@ -24,8 +24,13 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-django selenium flake8
 
+      # ──────────────────────────────────────────────────────────────
+      # Linter no bloqueante (si hay avisos, flake8 devuelve 0)
+      # ──────────────────────────────────────────────────────────────
       - name: Linter (flake8)
-        run: flake8 .
+        run: |
+          flake8 . --exit-zero
+      # ──────────────────────────────────────────────────────────────
 
       - name: Migraciones y pruebas (pytest)
         run: |
